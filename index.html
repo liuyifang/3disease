@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en" ng-app="myApp">
+<head>
+	<meta charset="UTF-8">
+	<title>3Disease</title>
+	<link rel='shortcut icon' href='favicon.ico' type='image/x-icon'/>
+	<script src="http://s.codepen.io/assets/libs/modernizr.js" type="text/javascript"></script>
+	<link rel="stylesheet" href="https://liuyifang.github.io/disease2/css/normalize.css">
+	<link rel="stylesheet" href="https://liuyifang.github.io/disease2/css/button.css">
+	<link rel="stylesheet" href="https://liuyifang.github.io/disease2/css/style-menus.css">
+	<link rel="stylesheet" href="https://liuyifang.github.io/disease2/css/style.css">
+	<link rel="stylesheet" href="https://liuyifang.github.io/disease2/css/bigtable.css">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+	<script src="https://liuyifang.github.io/disease2/js/marquee.js"></script>
+	<script src="https://liuyifang.github.io/disease2/js/angular.min.js"></script>
+	<script src="https://liuyifang.github.io/disease2/js/controllers.js"></script>
+</head>
+<body>
+	<div class="nav-mixed menu">
+		<nav id="multi-level-nav" class="multi-level-nav" role="navigation">
+			<ul>
+				<li><a href="//3dgb.cbi.pku.edu.cn/disease/">Home</a></li>
+				<li><a href="//3dgb.cbi.pku.edu.cn/disease/tutorial/">Tutorial</a></li>
+				<li><a href="//3dgb.cbi.pku.edu.cn/disease/about/">About</a></li>
+			</ul>
+		</nav><!-- #multi-level-nav .multi-level-nav -->
+	</div><!-- .mixed-menu -->
+	<div class="main" ng-controller = "MyController">
+		<section class="artistpage">
+			<div class="marquee">
+				<div class="search">
+					<h1>3Disease Browser</h1>
+					<h3>A Web server for human 3D genome structure and disease associated CR events</h3>
+					<input ng-model="query" placeholder="search for eg: IHH" autofocus>
+					<label class="formgroup">order by:
+						<select ng-model="order">
+							<option value="c9">Mean SI Score</option>
+							<option value="c3">Disease Name</option>
+							<option value="c7">Gene Name</option>
+						</select>
+					</label>
+					<label class="formgroup">
+						<input type="radio" ng-model="direction" name="direction" checked>
+						ascending
+					</label>
+					<label class="formgroup">
+						<input type="radio" ng-model="direction" name="direction" value="reverse">
+						descending
+					</label>
+				</div>
+				<div class="marquee_data">
+					<div class="marquee_panel" data-image="https://liuyifang.github.io/disease2/images/photo_beach">
+						<h3>Polydactyly Disease</h3>
+						<p>A CR event leads to an enhancer near the gene IHH and a high expression of IHH.</p>
+						<a class="cta" href="//3dgb.cbi.pku.edu.cn/disease/details/808/" target="_blank">View</a>
+					</div>
+					<div class="marquee_panel" data-image="https://liuyifang.github.io/disease2/images/photo_city">
+						<h3>Intellectual Disability Disease</h3>
+						<p>A genomic rearrangement involving AUTS2 is associated with autism and intellectual disability.</p>
+						<a class="cta" href="//3dgb.cbi.pku.edu.cn/disease/details/1683/" target="_blank">View</a>
+					</div>
+					<div class="marquee_panel" data-image="https://liuyifang.github.io/disease2/images/photo_mountains">
+						<h3>Random</h3>
+						<p>Randomly pick a disease-related CR region to see its detailed TAD and 3D genome model.</p>
+						<a class="cta" target="_blank" href="" onclick="this.href='//3dgb.cbi.pku.edu.cn/disease/details/'+(Math.floor(Math.random()*(3000-1))+1)">Random</a>
+					</div>
+				</div>
+			</div>
+			<div id="demo">
+				<!-- Responsive table starts here -->
+				<!-- For correct display on small screens you must add 'data-title' to each 'td' in your table -->
+				<div class="table-responsive-vertical shadow-z-1">
+					<!-- Table starts here -->
+					<table id="table" class="table table-bordered table-striped table-hover table-mc-default">
+						<thead>
+							<tr>
+								<th>CR ID</th>
+								<th>Disease name</th>
+								<th>Gene name</th>
+								<!-- <th>CR type</th> -->
+								<!-- <th>Genome loci</th> -->
+								<!-- <th>Length</th> -->
+								<th>Mean SI Score</th>
+								<th>P-value</th>
+								<th>View</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="i in clinvar | filter: query | orderBy: order: direction | limitTo: totalDisplayed">
+								<td data-title="CR ID"><a href="http://www.ncbi.nlm.nih.gov/{{ i.c10 }}" target="_blank">{{ i.c2 }}</a></td>
+								<td data-title="Disease name">{{ i.c3 }}</td>
+								<td data-title="Gene name">{{ i.c7 }}</td>
+								<!-- <td data-title="CR type">{{ i.c4 }}</td> -->
+								<!-- <td data-title="Genome loci">{{ i.c5 }}</td> -->
+								<!-- <td data-title="Length">{{ i.c6 }}</td> -->
+								<td data-title="Mean SI Score">{{ i.c9 }}</td>
+								<td data-title="P-value">{{ i.c11 }}</td>
+								<td data-title="View"><button type="button" class="btn btn-raised btn-link"><a href="details/{{ i.c1 }}/" target="_blank">View</a></button></td>
+							</tr>
+						</tbody>
+					</table>
+					<div style="text-align:center;">
+						<button type="button" class="btn btn-raised btn-link" ng-click="loadMore()">Next 20</button>
+					</div>​
+				</div>
+			</div>
+		</section>
+	</div>
+	<!-- GoStats JavaScript Based Code -->
+	<script type="text/javascript" src="http://gostats.cn/js/counter.js"></script>
+	<script type="text/javascript">_gos='monster.gostats.cn';_goa=490609;_got=5;_goi=1;_gol='网站流量统计源码';_GoStatsRun();</script>
+	<noscript><a target="_blank" title="网站流量统计源码"
+		href="http://gostats.cn"><img alt="网站流量统计源码"
+		src="http://monster.gostats.cn/bin/count/a_490609/t_5/i_1/counter.png"
+		style="border-width:0" /></a></noscript>
+		<!-- End GoStats JavaScript Based Code -->
+	</body>
+	</html>

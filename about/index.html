@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>View</title>
+  <link rel='shortcut icon' href='../favicon.ico' type='image/x-icon'/>
+  <link rel='stylesheet prefetch' href='../css/material.teal-red.min.css'>
+  <script src="d3pie.min.js"></script>
+  <script type="text/javascript" src="../js/jquery-1.7.1.min.js"></script>
+  <script type="text/javascript" src="../js/marquee.js"></script>
+  <script src="../lib/angular/angular.min.js"></script>
+  <script src="../js/controllers.js"></script>
+  <link rel="stylesheet" href="../css/style-menus.css" type="text/css" media="all">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="../css/bigtable.css">
+  <script src="../js/pace.js"></script>
+  <link href="../css/pace-theme-center-atom.css" rel="stylesheet" />
+  <link rel="stylesheet" href="../css/masonry.css">
+</head>
+<body>
+<div class="nav-mixed menu">
+    <nav id="multi-level-nav" class="multi-level-nav" role="navigation">
+        <ul>
+            <li><a href="//3dgb.cbi.pku.edu.cn/disease/">Home</a></li>
+            <li><a href="//3dgb.cbi.pku.edu.cn/disease/tutorial/">Tutorial</a></li>
+            <li><a href="//3dgb.cbi.pku.edu.cn/disease/about/">About</a></li>
+        </ul>
+    </nav><!-- #multi-level-nav .multi-level-nav -->
+</div><!-- .mixed-menu -->
+<br>
+<div class="grid">
+    <div class="grid-item grid-item--width3 grid-item--height9 card card-1">
+        <div id="pieChart"></div>
+    </div>
+    <div class="grid-item grid-item--width3 grid-item--height9 card card-1">
+        <div id="pieChart2"></div>
+    </div>
+    <div class="grid-item grid-item--width5 grid-item--height3 card card-1">
+      <div class="mdl-card__title">
+        <h1 class="mdl-card__title-text">Abstract</h1>
+      </div>
+      <div class="mdl-card__supporting-text">
+        <p>Chromosomal rearrangement (CR) event may disrupt genes and other functional structures. They have been implicated in many tumor and non-tumor human diseases. These rearrangements usually result in the formation of a fusion gene, derived from two disrupted normal genes, from which a fusion transcript and protein is generated. In some instances, however, rearrangements place an intact gene under the control of new regulatory elements or cause internal reorganization of a gene. But, how CR events lead to their associated diseases is also obscure. Recently research has provide that CR events lead to Polydactyly disease through change chromosomal 3D structure. In recent years, advances in DNA sequencing technologies has led to accurately identify CR event and chromosomal 3D structure, Combination of these biology information may give us some inspirations about pathogenicity of CR event and chromosomal 3D structure.</p>
+      </div>
+    </div>
+    <div class="grid-item grid-item--width5 grid-item--height10 card card-1">
+        <div class="mdl-card__title">
+          <h1 class="mdl-card__title-text">Updates</h1>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <p>Version 1.0.1,  Nov 10 2016</p>
+          <p>We would update one information from our 3D browsers comparing table that Juicebox **does** allow search by gene.</p><br>
+          <p>Version 1.0.0,  Apr 15 2016</p>
+          <p>We are pleased to announce that version 1.0.0 has been released and is available for the scientific community.</p>
+        </div>
+    </div>
+    <div class="grid-item grid-item--width5 grid-item--height10 card card-1">
+        <div class="mdl-card__title">
+          <h1 class="mdl-card__title-text">Contributing</h1>
+        </div>
+        <div class="mdl-card__supporting-text">
+          <p>We welcome any suggestions or bug reports to 3Disease Browser. To submit a request or bug report, please contact us or go to <a href="http://github.com/liuyifang/3disease/issues">Github issues tracker</a>.</p>
+        </div>
+    </div>
+
+    <div class="grid-item grid-item--width5 grid-item--height11 card card-1">
+        <div class="mdl-card__title">
+          <h1 class="mdl-card__title-text">Other Hi-C Web servers / Software</h1>
+        </div>
+        <div class="table-responsive-vertical shadow-z-1">
+        <!-- Table starts here -->
+        <table id="table" class="table table-bordered table-striped table-hover table-mc-default">
+            <thead>
+              <tr>
+                <th>Name</th>
+                <th>Link</th>
+                <th>PMID</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td data-title="Name">ChromContact</td>
+                <td data-title="Link"><a href="http://bioinfo.sls.kyushu-u.ac.jp/chromcontact/" target="_blank">http://bioinfo.sls.kyushu-u.ac.jp/chromcontact/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/26666652" target="_blank">26666652</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">HiView</td>
+                <td data-title="Link"><a href="http://www.unc.edu/~yunmli/HiView/" target="_blank">http://www.unc.edu/~yunmli/HiView/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/26969411" target="_blank">26969411</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Hi-C data browser (Dekker lab)</td>
+                <td data-title="Link"><a href="http://hic.umassmed.edu/welcome/welcome.php" target="_blank">http://hic.umassmed.edu/welcome/welcome.php</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/" target="_blank"></a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Hi-C data browser (Yue lab)</td>
+                <td data-title="Link"><a href="http://yuelab.org/hi-c/database.php" target="_blank">http://yuelab.org/hi-c/database.php</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/" target="_blank"></a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">WashU EpiGenome browser (Wang lab)</td>
+                <td data-title="Link"><a href="http://vizhub.wustl.edu/" target="_blank">http://vizhub.wustl.edu/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/23629413" target="_blank">23629413</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Juicebox (Lieberman- Aiden lab)</td>
+                <td data-title="Link"><a href="http://www.aidenlab.org/juicebox/" target="_blank">http://www.aidenlab.org/juicebox/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/25497547" target="_blank">25497547</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">4DGenome browser</td>
+                <td data-title="Link"><a href="http://4dgenome.int-med.uiowa.edu" target="_blank">http://4dgenome.int-med.uiowa.edu</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/25788621" target="_blank">25788621</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Genomic HyperBrowser</td>
+                <td data-title="Link"><a href="https://hyperbrowser.uio.no/hb/" target="_blank">https://hyperbrowser.uio.no/hb/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/21182759" target="_blank">21182759</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">GMOL</td>
+                <td data-title="Link"><a href="https://sourceforge.net/projects/gmol/" target="_blank">https://sourceforge.net/projects/gmol/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/26868282" target="_blank">26868282</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Genome3D</td>
+                <td data-title="Link"><a href="http://www.genome3d.eu" target="_blank">http://www.genome3d.eu</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/25348407" target="_blank">25348407</a></td>
+              </tr>
+              <tr>
+                <td data-title="Name">Tadkit</td>
+                <td data-title="Link"><a href="http://sgt.cnag.cat/3dg/tadkit/" target="_blank">http://sgt.cnag.cat/3dg/tadkit/</a></td>
+                <td data-title="PMID"><a href="http://www.ncbi.nlm.nih.gov/pubmed/" target="_blank"></a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+</div>
+
+
+
+
+</div>
+  <script src="../js/jquery-1.7.1.min.js"></script>
+  <script src="../js/masonry.pkgd.js"></script>
+  <script src="../js/masonry.js"></script>
+  <script src="../js/d3.min.js"></script>
+  <script src="../js/queue.v1.min.js"></script>
+  <script src="../js/plotly-latest.min.js"></script>
+  <script src="../js/material.min.js"></script>
+  <script>
+  var pie = new d3pie("pieChart", {
+    "header": {
+      "title": {
+        "text": "Structurial variation length",
+        "fontSize": 22,
+        "font": "verdana"
+      },
+      "subtitle": {
+        "text": "Total: 4218",
+        "color": "#999999",
+        "fontSize": 10,
+        "font": "verdana"
+      },
+      "titleSubtitlePadding": 12
+    },
+    "footer": {
+      "color": "#999999",
+      "fontSize": 11,
+      "font": "open sans",
+      "location": "bottom-center"
+    },
+    "size": {
+      "canvasHeight": 400,
+      "canvasWidth": 590,
+      "pieOuterRadius": "80%"
+    },
+    "data": {
+      "content": [
+        {
+          "label": "500k~1M",
+          "value": 909,
+          "color": "#1f77b4"
+        },
+        {
+          "label": "1M~5M",
+          "value": 2367,
+          "color": "#e4a14b"
+        },
+        {
+          "label": "5M~10M",
+          "value": 942,
+          "color": "#d62728"
+        }
+      ]
+    },
+    "labels": {
+      "outer": {
+        "pieDistance": 15
+      },
+      "inner": {
+        "format": "value"
+      },
+      "mainLabel": {
+        "font": "verdana"
+      },
+      "percentage": {
+        "color": "#e1e1e1",
+        "font": "verdana",
+        "decimalPlaces": 0
+      },
+      "value": {
+        "color": "#e1e1e1",
+        "font": "verdana"
+      },
+      "lines": {
+        "enabled": true,
+        "color": "#cccccc"
+      },
+      "truncation": {
+        "enabled": true
+      }
+    },
+    "effects": {
+      "pullOutSegmentOnClick": {
+        "effect": "linear",
+        "speed": 400,
+        "size": 8
+      }
+    }
+  });
+
+  var pie2 = new d3pie("pieChart2", {
+    "header": {
+      "title": {
+        "text": "CR type",
+        "fontSize": 22,
+        "font": "verdana"
+      },
+      "subtitle": {
+        "text": "Total: 4218",
+        "color": "#999999",
+        "fontSize": 10,
+        "font": "verdana"
+      },
+      "titleSubtitlePadding": 12
+    },
+    "footer": {
+      "color": "#999999",
+      "fontSize": 11,
+      "font": "open sans",
+      "location": "bottom-center"
+    },
+    "size": {
+      "canvasHeight": 400,
+      "canvasWidth": 590,
+      "pieOuterRadius": "80%"
+    },
+    "data": {
+      "content": [
+        {
+          "label": "copy number gain",
+          "value": 1950,
+          "color": "#7e3838"
+        },
+        {
+          "label": "copy number loss",
+          "value": 2224,
+          "color": "#7e6538"
+        },
+        {
+          "label": "Deletion & Others",
+          "value": 44,
+          "color": "#7c7e38"
+        }
+      ]
+    },
+    "labels": {
+      "outer": {
+        "pieDistance": 15
+      },
+      "inner": {
+        "format": "value"
+      },
+      "mainLabel": {
+        "font": "verdana"
+      },
+      "percentage": {
+        "color": "#e1e1e1",
+        "font": "verdana",
+        "decimalPlaces": 0
+      },
+      "value": {
+        "color": "#e1e1e1",
+        "font": "verdana"
+      },
+      "lines": {
+        "enabled": true,
+        "color": "#cccccc"
+      },
+      "truncation": {
+        "enabled": true
+      }
+    },
+    "effects": {
+      "pullOutSegmentOnClick": {
+        "effect": "linear",
+        "speed": 400,
+        "size": 8
+      }
+    }
+  });
+  </script>
+</body>
+</html>

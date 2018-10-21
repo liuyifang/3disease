@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+<head>
+  <meta charset="UTF-8">
+  <title>View</title>
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+  <script src="../../lib/angular/angular.min.js"></script>
+  <script src="../../js/controllers.js"></script>
+  <link rel="stylesheet" href="../../css/style.css">
+  <script src="../../js/pace.js"></script>
+  <link href="../../css/pace-theme-center-atom.css" rel="stylesheet" />
+</head>
+<body>
+  <header>
+    <nav class="cf" ng-include="'../../views/nav.html'"></nav>
+  </header>
+
+  <div class="all">
+    <div class="mainStories">
+      <div class="scard">
+        <div class="outer-wrapper">
+          <div class="chart"></div>
+        </div>
+      </div>
+    </div>
+    <div class="smallStories">
+      <div class="small story">
+        <h3>Polydactyly Disease</h3>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, libero quis eleifend commodo, sapien felis convallis mauris, vitae dignissim purus sem eget ligula. Nam tincidunt libero sed metus mattis lobortis. Aenean a porttitor velit. Donec est libero, mollis id semper quis, hendrerit vitae nibh.</p>
+      </div>
+      <br/>
+      <div class="scard">
+        <div class="outer-wrapper">
+          <div id="myDiv"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/jquery-1.7.1.min.js"></script>
+  <script src="../../js/d3.min.js"></script>
+  <script src="../../js/queue.v1.min.js"></script>
+  <script src="../../js/plotly-latest.min.js"></script>
+  <script src="view_1.js"></script>
+</body>
+</html>
