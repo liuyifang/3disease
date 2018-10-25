@@ -1,5 +1,4 @@
 # 3Disease Browser
-A Web server for human 3D genome structure and disease associated CR events
 ![](image/home.png)
 
 ### Citing 3Disease Browser
